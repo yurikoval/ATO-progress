@@ -18,6 +18,8 @@ sizes = [
 
 excludes = %w[2014-07-19]
 
+info_text = "As of #{Date.today}\n@yuri_koval"
+
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
 
@@ -31,7 +33,25 @@ sizes.each do |x, y, delay|
       next
     end
     full_image = Magick::Image::read(image_path).first
-    animation << full_image.resize_to_fill(x, y)
+    # resize image
+    resized_image = full_image.resize_to_fill(x, y)
+
+    # add watermark
+    pointsize = (y / 20).round
+    watermark = Magick::Image.new(x, y) do
+      self.background_color = 'none'
+    end
+    watermark.alpha(Magick::ActivateAlphaChannel)
+    watermark_text = Magick::Draw.new
+    watermark_text.annotate(watermark, 0,0,0,0, info_text) do
+      watermark_text.gravity = SouthWestGravity
+      self.pointsize = pointsize
+      self.font_family = "Helvetica"
+      self.stroke = "none"
+    end
+    resized_image.composite!(watermark, SouthWestGravity, OverCompositeOp)
+
+    animation << resized_image
     puts "Processed #{image_path}"
   end
 
