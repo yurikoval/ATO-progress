@@ -10,25 +10,28 @@ require "rmagick"
 require "date"
 include Magick
 
-x = 600
-y = 500
-delay = 50
+# X, Y, delay
+sizes = [
+  [300, 250, 50],
+  [800, 667, 50],
+]
 
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
-export_file_path = File.join dir, "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f.gif"
 
 puts "Reading images in #{images_dir}"
+sizes.each do |x, y, delay|
+  export_file_path = File.join dir, "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f.gif"
+  animation = ImageList.new()
+  Dir[File.join images_dir, "*.jpg"].each do |image_path|
+    full_image = Magick::Image::read(image_path).first
+    animation << full_image.resize_to_fill(x, y)
+    puts "Processed #{image_path}"
+  end
 
-animation = ImageList.new()
-
-Dir[File.join images_dir, "*.jpg"].each do |image_path|
-  full_image = Magick::Image::read(image_path).first
-  animation << full_image.resize_to_fill(x, y)
-  puts "Processed #{image_path}"
+  puts "Writing to #{export_file_path}"
+  animation.delay = delay
+  animation.write(export_file_path)
+  animation.destroy!
 end
-
-puts "Writing to #{export_file_path}"
-animation.delay = delay
-animation.write(export_file_path)
 puts "DONE."
