@@ -16,6 +16,8 @@ sizes = [
   [800, 667, 50],
 ]
 
+excludes = %w[2014-07-19]
+
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
 
@@ -24,6 +26,10 @@ sizes.each do |x, y, delay|
   export_file_path = File.join dir, "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f.gif"
   animation = ImageList.new()
   Dir[File.join images_dir, "*.jpg"].each do |image_path|
+    if excludes.select{ |exclude| image_path =~ /#{exclude}\.jpg$/ }.any?
+      puts "Skipping #{image_path}  *   *   *"
+      next
+    end
     full_image = Magick::Image::read(image_path).first
     animation << full_image.resize_to_fill(x, y)
     puts "Processed #{image_path}"
