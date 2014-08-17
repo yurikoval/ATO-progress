@@ -10,6 +10,8 @@ This is a collection of [images published](http://mediarnbo.org/) by [National S
 
 ![image](http://yurikoval.github.io/ATO-progress/img/ukraine-ato-current-small.gif)
 
+[Large Format](http://yurikoval.github.io/ATO-progress/img/ukraine-ato-current.gif)
+
 #### Notes
 
 Images are not published daily, therefore, progress cannot be judged against linear progression.
