@@ -34,16 +34,17 @@ sizes.each do |x, y, delay|
     end
     full_image = Magick::Image::read(image_path).first
     # resize image
-    resized_image = full_image.resize_to_fill(x, y)
+    timeline_height = [5, (y / 200).round].max
+    resized_image = full_image.resize_to_fill(x, y).extent(x, y + timeline_height)
 
     # add watermark
     pointsize = (y / 20).round
-    watermark = Magick::Image.new(x, y) do
+    watermark = Magick::Image.new(x, y + timeline_height) do
       self.background_color = 'none'
     end
     watermark.alpha(Magick::ActivateAlphaChannel)
     watermark_text = Magick::Draw.new
-    watermark_text.annotate(watermark, 0,0,0,0, info_text) do
+    watermark_text.annotate(watermark, 0,0,0,timeline_height, info_text) do
       watermark_text.gravity = SouthWestGravity
       self.pointsize = pointsize
       self.font_family = "Helvetica"
