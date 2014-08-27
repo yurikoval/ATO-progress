@@ -27,15 +27,21 @@ puts "Reading images in #{images_dir}"
 sizes.each do |x, y, delay|
   export_file_path = File.join dir, "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f.gif"
   animation = ImageList.new()
-  Dir[File.join images_dir, "*.jpg"].each do |image_path|
-    if excludes.select{ |exclude| image_path =~ /#{exclude}\.jpg$/ }.any?
-      puts "Skipping #{image_path}  *   *   *"
-      next
-    end
+  files = Dir[File.join images_dir, "*.jpg"].reject do |image_path|
+    excludes.any? { |exclude| image_path =~ /#{exclude}\.jpg$/ }
+  end
+  files.each.with_index(1) do |image_path, index|
     full_image = Magick::Image::read(image_path).first
     # resize image
-    timeline_height = [5, (y / 200).round].max
+    timeline_height = [5, (y.to_f / 200).round].max
     resized_image = full_image.resize_to_fill(x, y).extent(x, y + timeline_height)
+
+    # timeline
+    progress_x = (x.to_f / files.size) * index
+    timeline = Magick::Draw.new
+    timeline.fill = 'black'
+    timeline.rectangle 0, y, progress_x, y + timeline_height
+    timeline.draw resized_image
 
     # add watermark
     pointsize = (y / 20).round
