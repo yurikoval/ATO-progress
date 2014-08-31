@@ -18,7 +18,7 @@ sizes = [
 
 excludes = %w[2014-07-19]
 
-info_text = "As of #{Date.today}\n@yuri_koval"
+info_text = "#{Date.today}\n@yuri_koval"
 
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
