@@ -35,6 +35,7 @@ sizes.each do |x, y, delay|
     # resize image
     timeline_height = [5, (y.to_f / 200).round].max
     resized_image = full_image.resize_to_fill(x, y).extent(x, y + timeline_height)
+    full_image.destroy!
 
     # timeline
     progress_x = (x.to_f / files.size) * index
@@ -57,6 +58,7 @@ sizes.each do |x, y, delay|
       self.stroke = "none"
     end
     resized_image.composite!(watermark, SouthWestGravity, OverCompositeOp)
+    watermark.destroy!
 
     animation << resized_image
     puts "Processed #{image_path}"
