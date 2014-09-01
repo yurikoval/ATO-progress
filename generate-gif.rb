@@ -10,10 +10,10 @@ require "rmagick"
 require "date"
 include Magick
 
-# X, Y, delay
+# X, Y, delay, name
 sizes = [
-  [300, 250, 50],
-  [800, 667, 50],
+  [300, 250, 50, 'ukraine-ato-current-small'],
+  [800, 667, 50, 'ukraine-ato-current'],
 ]
 
 excludes = %w[2014-07-19]
@@ -24,8 +24,9 @@ dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
 
 puts "Reading images in #{images_dir}"
-sizes.each do |x, y, delay|
-  export_file_path = File.join dir, "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f.gif"
+sizes.each do |x, y, delay, filename|
+  filename ||= "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f"
+  export_file_path = File.join dir, 'img', "#{filename}.gif"
   animation = ImageList.new()
   files = Dir[File.join images_dir, "*.jpg"].reject do |image_path|
     excludes.any? { |exclude| image_path =~ /#{exclude}\.jpg$/ }
