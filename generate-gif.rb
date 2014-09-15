@@ -18,7 +18,6 @@ sizes = [
 
 excludes = %w[2014-07-19]
 
-info_text = "#{Date.today}\n@yuri_koval"
 
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
@@ -31,6 +30,8 @@ sizes.each do |x, y, delay, filename|
   files = Dir[File.join images_dir, "*.jpg"].reject do |image_path|
     excludes.any? { |exclude| image_path =~ /#{exclude}\.jpg$/ }
   end
+  last_file_name = files.last.match(/(\d{4}\-\d{2}\-\d{2}).jpg$/)[1]
+  info_text = "#{last_file_name}\n@yuri_koval"
   files.each.with_index(1) do |image_path, index|
     full_image = Magick::Image::read(image_path).first
     # resize image
