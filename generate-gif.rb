@@ -12,7 +12,8 @@ include Magick
 
 # X, Y, delay, name
 sizes = [
-  [150, 125, 50, 'ukraine-ato-current-small'],
+  [150, 125, 50, 'ukraine-ato-current-tiny'],
+  [300, 250, 50, 'ukraine-ato-current-small'],
   [800, 667, 50, 'ukraine-ato-current'],
 ]
 
