@@ -28,3 +28,6 @@ Images are not published daily, therefore, progress cannot be judged against lin
 2. Rename your image to `YYYY-MM-DD.jpg` format.
 3. `gem install rmagick`
 4. `ruby generate-gif.rb`
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yurikoval/ato-progress/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
