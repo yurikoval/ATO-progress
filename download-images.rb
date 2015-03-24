@@ -15,14 +15,17 @@ start_date = Date.strptime(File.basename(files.last, '.*'), '%Y-%m-%d') + 1
   day = date.strftime('%d')
   url = "http://mediarnbo.org/wp-content/uploads/#{date.year}/#{month}/#{day}-#{month}.jpg"
   save_file = File.join(images_dir, "#{date.strftime('%Y-%m-%d')}.jpg")
-
+  if File.exist?(save_file)
+    puts "Skipping #{url}"
+    next
+  end
   begin
     open(save_file, 'wb') do |file|
         file << open(url).read
     end
     puts "Saved #{url}"
   rescue OpenURI::HTTPError => e
-    puts e.message
+    puts "#{e.message}: #{url}"
     File.delete save_file
   end
 end
