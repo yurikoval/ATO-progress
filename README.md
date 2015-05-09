@@ -31,3 +31,9 @@ Images are not published daily, therefore, progress cannot be judged against lin
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/yurikoval/ato-progress/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+#### Working with webpage
+
+1. `bundle install`
+1. `bundle exec guard`
+1. `ruby -run -e httpd . -p 9090`
+1. `open http://localhost:9090`
