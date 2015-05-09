@@ -37,3 +37,7 @@ Images are not published daily, therefore, progress cannot be judged against lin
 1. `bundle exec guard`
 1. `ruby -run -e httpd . -p 9090`
 1. `open http://localhost:9090`
+
+#### Generating JSON for webpage
+
+`ruby generate-json.rb`
