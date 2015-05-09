@@ -47,7 +47,7 @@
               <i class="glyphicon glyphicon-circle-arrow-left"></i>
             </button>
           </div>
-          <input class="form-control text-center" id="date" data-bind="value: current_image().date">
+          <input class="form-control text-center" id="date" data-bind="value: current_image().date.toString()">
           <div class="input-group-btn">
             <button class="btn btn-default" data-bind="click: showNext, enable: $data.showNextEnabled">
               <i class="glyphicon glyphicon-circle-arrow-right"></i>

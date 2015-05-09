@@ -37,7 +37,7 @@ Gallery = (options) ->
       date = "#{d.getFullYear()}-#{('0'+(d.getMonth()+1)).slice(-2)}-#{('0' + d.getDate()).slice(-2)}"
       date in @avaiableDates
     format: 'yyyy-mm-dd'
-  $(document).on 'changeDate', @updateImageByDate.bind(this)
+  .on 'changeDate', @updateImageByDate.bind(this)
 
   return @
 

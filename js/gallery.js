@@ -74,8 +74,7 @@
         };
       })(this),
       format: 'yyyy-mm-dd'
-    });
-    $(document).on('changeDate', this.updateImageByDate.bind(this));
+    }).on('changeDate', this.updateImageByDate.bind(this));
     return this;
   };
 
