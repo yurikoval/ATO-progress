@@ -13,7 +13,10 @@ loadJSON = (file, callback) ->
 
 Gallery = (options) ->
   @images = ko.observableArray(options.images)
-  @current_image = ko.observable(@images()[@images().length-1])
+  @current_image_index = ko.observable(@images().length-1)
+  @current_image = ko.computed(=> @images()[@current_image_index()])
+  @showPrevious = -> @current_image_index(Math.max(@current_image_index()-1, 0))
+  @showNext = -> @current_image_index(Math.min(@current_image_index()+1, @images().length-1))
   return @
 
 loadJSON 'img/images.json', (data) ->

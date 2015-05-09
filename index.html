@@ -20,8 +20,14 @@
     <div class="row" style="margin-top: 15px;">
       <div class="col-sm-12">
         <div class="btn-group">
+          <button class="btn btn-default" data-bind="click: showPrevious">
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+          </button>
           <button class="btn btn-default disabled">
             <span data-bind="text: current_image().date"></span>
+          </button>
+          <button class="btn btn-default" data-bind="click: showNext">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
           </button>
         </div>
       </div>
