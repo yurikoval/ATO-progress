@@ -1,9 +1,61 @@
 <!doctype html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/" />
+    <meta charset="utf-8">
+    <title>Ukraine at War with Russia: Situation Map</title>
+    <meta name="author" content="Yuri Koval'ov">
+    <meta name="description" content="An archive of images published by National Security and Defense Council of Ukraine on the progress of war with Russia (dubbed 'Anti-Terrorist Operation')">
+    <meta name="keywords" content="Ukraine, war, Russia, ATO">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="summary" name="twitter:card" />
+    <meta content="Ukraine at War with Russia: Situation Map" name="twitter:title" />
+    <meta content="An archive of images published by National Security and Defense Council of Ukraine on the progress of war with Russia (dubbed 'Anti-Terrorist Operation')" name="twitter:description" />
+    <meta content="Ukraine at War with Russia: Situation Map" property="og:title" />
+    <meta content="https://yurikoval.github.io/ATO-progress" property="og:url" />
+    <meta content="An archive of images published by National Security and Defense Council of Ukraine on the progress of war with Russia (dubbed 'Anti-Terrorist Operation')" property="og:description" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <style type="text/css">
+      .image {
+        width: 100%;
+      }
+      .description {
+        font-size: 0.9em;
+        font-weight: normal;
+      }
+    </style>
   </head>
   <body>
-  <a href="http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/">http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Ukraine at War with Russia: Situation Map</h1>
+        <p class="description">Russia invades Ukraine under disguise of 'civil unrest.' Weapons are supplied by Russia to terrorists and Russian soldiers in the East (which resulted in <a href="http://www.forbes.com/sites/paulroderickgregory/2015/01/12/new-study-on-the-shooting-down-of-mh17-points-to-russian-forces/" target="_blank">downing of Malaysian MH17 airplane</a>), who continue to terrorize the local population. In defense,  Ukraine is forced to unofficially go to war with Russia, labeling it the 'Anti-Terrorist Operation'. This is an archive of images published by National Security and Defense Council of Ukraine. <a href="http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/">Progress in GIF</a> is also available.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <img data-bind="attr: {src: current_image().path}" class="image">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-sm-12">
+        <div class="btn-group">
+          <button class="btn btn-default" data-bind="click: showPrevious">
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>
+          </button>
+          <button class="btn btn-default disabled">
+            <span data-bind="text: current_image().date"></span>
+          </button>
+          <button class="btn btn-default" data-bind="click: showNext">
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+  <script src="js/gallery.js"></script>
   </body>
 </html>
