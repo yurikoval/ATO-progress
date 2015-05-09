@@ -30,6 +30,16 @@
     this.showNext = function() {
       return this.current_image_index(Math.min(this.current_image_index() + 1, this.images().length - 1));
     };
+    this.showPreviousEnabled = ko.pureComputed((function(_this) {
+      return function() {
+        return _this.current_image_index() > 0;
+      };
+    })(this));
+    this.showNextEnabled = ko.pureComputed((function(_this) {
+      return function() {
+        return _this.current_image_index() < _this.images().length - 1;
+      };
+    })(this));
     this.avaiableDates = this.images().map(function(image) {
       return image.date;
     });

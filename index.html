@@ -43,13 +43,13 @@
       <div class="col-md-3 col-sm-4">
         <div class="input-group">
           <div class="input-group-btn">
-            <button class="btn btn-default" data-bind="click: showPrevious">
+            <button class="btn btn-default" data-bind="click: showPrevious, enable: $data.showPreviousEnabled">
               <i class="glyphicon glyphicon-circle-arrow-left"></i>
             </button>
           </div>
           <input class="form-control text-center" id="date" data-bind="value: current_image().date">
           <div class="input-group-btn">
-            <button class="btn btn-default" data-bind="click: showNext">
+            <button class="btn btn-default" data-bind="click: showNext, enable: $data.showNextEnabled">
               <i class="glyphicon glyphicon-circle-arrow-right"></i>
             </button>
           </div>

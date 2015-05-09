@@ -18,12 +18,14 @@ Gallery = (options) ->
   @current_image = ko.pureComputed(=> @images()[@current_image_index()])
   @showPrevious = -> @current_image_index(Math.max(@current_image_index()-1, 0))
   @showNext = -> @current_image_index(Math.min(@current_image_index()+1, @images().length-1))
+  @showPreviousEnabled = ko.pureComputed => @current_image_index() > 0
+  @showNextEnabled = ko.pureComputed => @current_image_index() < @images().length - 1
   @avaiableDates = @images().map((image) -> image.date)
   @updateImageByDate = (event) =>
     for image, index in @images()
       if image.date == event.target.value
         @current_image_index(index)
-        break and return true
+        return true
 
   @current_image_index.subscribe =>
     @imageIsLoading(true)
