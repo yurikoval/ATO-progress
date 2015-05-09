@@ -14,8 +14,9 @@
     <meta content="https://yurikoval.github.io/ATO-progress" property="og:url" />
     <meta content="An archive of images published by National Security and Defense Council of Ukraine on the progress of war with Russia (dubbed 'Anti-Terrorist Operation')" property="og:description" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.min.css">
     <style type="text/css">
       #image {
         width: 100%;
@@ -39,17 +40,19 @@
       </div>
     </div>
     <div class="row" style="margin-bottom: 15px;">
-      <div class="col-sm-12">
-        <div class="btn-group">
-          <button class="btn btn-default" data-bind="click: showPrevious">
-            <i class="glyphicon glyphicon-circle-arrow-left"></i>
-          </button>
-          <button class="btn btn-default disabled">
-            <span data-bind="text: current_image().date"></span>
-          </button>
-          <button class="btn btn-default" data-bind="click: showNext">
-            <i class="glyphicon glyphicon-circle-arrow-right"></i>
-          </button>
+      <div class="col-md-3 col-sm-4">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button class="btn btn-default" data-bind="click: showPrevious">
+              <i class="glyphicon glyphicon-circle-arrow-left"></i>
+            </button>
+          </div>
+          <input class="form-control text-center" id="date" data-bind="value: current_image().date">
+          <div class="input-group-btn">
+            <button class="btn btn-default" data-bind="click: showNext">
+              <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -69,8 +72,11 @@
       </div>
     </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
-  <script src="js/imagesloaded.pkgd.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
   <script src="js/gallery.js"></script>
   </body>
 </html>

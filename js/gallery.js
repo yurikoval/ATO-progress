@@ -1,5 +1,6 @@
 (function() {
-  var Gallery, loadJSON;
+  var Gallery, loadJSON,
+    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   loadJSON = function(file, callback) {
     var xobj;
@@ -29,6 +30,22 @@
     this.showNext = function() {
       return this.current_image_index(Math.min(this.current_image_index() + 1, this.images().length - 1));
     };
+    this.avaiableDates = this.images().map(function(image) {
+      return image.date;
+    });
+    this.updateImageByDate = (function(_this) {
+      return function(event) {
+        var i, image, index, len, ref;
+        ref = _this.images();
+        for (index = i = 0, len = ref.length; i < len; index = ++i) {
+          image = ref[index];
+          if (image.date === event.target.value) {
+            _this.current_image_index(index);
+            return true;
+          }
+        }
+      };
+    })(this);
     this.current_image_index.subscribe((function(_this) {
       return function() {
         _this.imageIsLoading(true);
@@ -37,14 +54,28 @@
         });
       };
     })(this));
+    $('#date').datepicker({
+      autoclose: true,
+      beforeShowDay: (function(_this) {
+        return function(d) {
+          var date;
+          date = (d.getFullYear()) + "-" + (('0' + (d.getMonth() + 1)).slice(-2)) + "-" + (('0' + d.getDate()).slice(-2));
+          return indexOf.call(_this.avaiableDates, date) >= 0;
+        };
+      })(this),
+      format: 'yyyy-mm-dd'
+    });
+    $(document).on('changeDate', this.updateImageByDate.bind(this));
     return this;
   };
 
-  loadJSON('img/images.json', function(data) {
-    var gallery, images_json;
-    images_json = JSON.parse(data);
-    gallery = new Gallery(images_json);
-    return ko.applyBindings(gallery);
+  $(function() {
+    return loadJSON('img/images.json', function(data) {
+      var images_json;
+      images_json = JSON.parse(data);
+      window.gallery = new Gallery(images_json);
+      return ko.applyBindings(gallery);
+    });
   });
 
 }).call(this);
