@@ -1,9 +1,33 @@
 <!doctype html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <style type="text/css">
+      .image {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-  <a href="http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/">http://blog.yurikoval.com/ukraine-anti-terrorist-operation-progress-in-gif/</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <img data-bind="attr: {src: current_image().path}" class="image">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-sm-12">
+        <div class="btn-group">
+          <button class="btn btn-default disabled">
+            <span data-bind="text: current_image().date"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+  <script src="js/gallery.js"></script>
   </body>
 </html>
