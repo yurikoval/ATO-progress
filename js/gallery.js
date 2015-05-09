@@ -15,9 +15,10 @@
   };
 
   Gallery = function(options) {
+    this.imageIsLoading = ko.observable(false);
     this.images = ko.observableArray(options.images);
     this.current_image_index = ko.observable(this.images().length - 1);
-    this.current_image = ko.computed((function(_this) {
+    this.current_image = ko.pureComputed((function(_this) {
       return function() {
         return _this.images()[_this.current_image_index()];
       };
@@ -28,12 +29,21 @@
     this.showNext = function() {
       return this.current_image_index(Math.min(this.current_image_index() + 1, this.images().length - 1));
     };
+    this.current_image_index.subscribe((function(_this) {
+      return function() {
+        _this.imageIsLoading(true);
+        return imagesLoaded('#image', function() {
+          return _this.imageIsLoading(false);
+        });
+      };
+    })(this));
     return this;
   };
 
   loadJSON('img/images.json', function(data) {
-    window.images_json = JSON.parse(data);
-    window.gallery = new Gallery(images_json);
+    var gallery, images_json;
+    images_json = JSON.parse(data);
+    gallery = new Gallery(images_json);
     return ko.applyBindings(gallery);
   });
 
