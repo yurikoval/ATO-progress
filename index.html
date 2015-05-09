@@ -39,17 +39,19 @@
       </div>
     </div>
     <div class="row" style="margin-bottom: 15px;">
-      <div class="col-sm-12">
-        <div class="btn-group">
-          <button class="btn btn-default" data-bind="click: showPrevious">
-            <i class="glyphicon glyphicon-circle-arrow-left"></i>
-          </button>
-          <button class="btn btn-default disabled">
-            <span data-bind="text: current_image().date"></span>
-          </button>
-          <button class="btn btn-default" data-bind="click: showNext">
-            <i class="glyphicon glyphicon-circle-arrow-right"></i>
-          </button>
+      <div class="col-md-3 col-sm-4">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button class="btn btn-default" data-bind="click: showPrevious">
+              <i class="glyphicon glyphicon-circle-arrow-left"></i>
+            </button>
+          </div>
+          <input class="form-control text-center" data-bind="value: current_image().date">
+          <div class="input-group-btn">
+            <button class="btn btn-default" data-bind="click: showNext">
+              <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
