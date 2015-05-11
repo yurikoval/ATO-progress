@@ -10,6 +10,14 @@ require "rmagick"
 require "date"
 include Magick
 
+require 'bundler'
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
+
 # X, Y, delay, name
 sizes = [
   [125, 104, 50, 'ukraine-ato-current-tiny'],
@@ -22,6 +30,7 @@ excludes = %w[2014-07-19]
 
 dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
+image_optim = ImageOptim.new(:pngout => false, :svgo => false, :nice => 5)
 
 puts "Reading images in #{images_dir}"
 sizes.each do |x, y, delay, filename|
@@ -71,5 +80,6 @@ sizes.each do |x, y, delay, filename|
   animation.delay = delay
   animation.write(export_file_path)
   animation.destroy!
+  image_optim.optimize_image! export_file_path
 end
 puts "DONE."
