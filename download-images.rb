@@ -2,6 +2,13 @@
 #
 #
 #
+require 'bundler'
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 require 'open-uri'
 
 dir = File.expand_path(File.dirname(__FILE__))
@@ -9,6 +16,7 @@ images_dir = File.join dir, 'img'
 files = Dir[File.join images_dir, "*.jpg"]
 
 start_date = Date.strptime(File.basename(files.last, '.*'), '%Y-%m-%d') + 1
+image_optim = ImageOptim.new(:pngout => false, :svgo => false, :nice => 5)
 
 (start_date..Date.today).to_a.each do |date|
   month = date.strftime('%m')
@@ -23,6 +31,7 @@ start_date = Date.strptime(File.basename(files.last, '.*'), '%Y-%m-%d') + 1
     open(save_file, 'wb') do |file|
         file << open(url).read
     end
+    image_optim.optimize_image! save_file
     puts "Saved #{url}"
   rescue OpenURI::HTTPError => e
     puts "#{e.message}: #{url}"
