@@ -33,7 +33,8 @@ images_dir = File.join dir, 'img'
 image_optim = ImageOptim.new(:pngout => false, :svgo => false, :nice => 5)
 
 puts "Reading images in #{images_dir}"
-sizes.each do |x, y, delay, filename|
+sizes.each do |original_x, y, delay, filename|
+  x = original_x * 0.731 # Remove map legend
   filename ||= "ukraine-ato-#{Date.today}-#{x}x#{y}-#{delay}f"
   export_file_path = File.join dir, 'img', "#{filename}.gif"
   animation = ImageList.new()
@@ -46,7 +47,7 @@ sizes.each do |x, y, delay, filename|
     full_image = Magick::Image::read(image_path).first
     # resize image
     timeline_height = [5, (y.to_f / 200).round].max
-    resized_image = full_image.resize_to_fill(x, y).extent(x, y + timeline_height)
+    resized_image = full_image.resize_to_fill(original_x, y).extent(x, y + timeline_height)
     full_image.destroy!
 
     # timeline
