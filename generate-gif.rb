@@ -73,7 +73,7 @@ sizes.each do |x, y, delay, filename|
     watermark.destroy!
 
     animation << resized_image
-    puts "Processed #{image_path}"
+    puts "[#{filename}] Processed #{image_path}"
   end
 
   puts "Writing to #{export_file_path}"
