@@ -11,12 +11,7 @@ require "date"
 include Magick
 
 require 'bundler'
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+Bundler.require if defined?(Bundler)
 
 # X, Y, delay, name
 sizes = [
