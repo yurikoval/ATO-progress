@@ -24,7 +24,6 @@ class AtoGifGenerator
 
   def save(save_path)
     animation = ImageList.new()
-    last_file_name = files.last.match(/(\d{4}\-\d{2}\-\d{2}).jpg$/)[1]
     files.each.with_index(1) do |image_path, index|
       puts "[#{save_path}] processing #{image_path}"
       image = Magick::Image::read(image_path).first
