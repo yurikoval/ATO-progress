@@ -19,6 +19,7 @@ class AtoGifGenerator
     @x = @original_x * 0.731 # Remove map legend
     @y = options.fetch(:y, 667)
     @frame_delay = options.fetch(:frame_delay, 50)
+    @take_every_x_frame = options.fetch(:take_every_x_frame, 1)
     @dir = options.fetch :dir, File.expand_path(File.dirname(__FILE__))
   end
 
@@ -43,8 +44,11 @@ class AtoGifGenerator
 
   private
     def files
-      @files ||= Dir[File.join @dir, "*.jpg"].reject do |image_path|
-        excluded_files.any? { |exclude| image_path =~ /#{exclude}\.jpg$/ }
+      @files ||= begin
+        base_files = Dir[File.join @dir, "*.jpg"].reject do |image_path|
+          excluded_files.any? { |exclude| image_path =~ /#{exclude}\.jpg$/ }
+        end.reverse
+        (0...base_files.count).step(@take_every_x_frame).map{|s| base_files[s]}.reverse
       end
     end
 
@@ -103,11 +107,12 @@ dir = File.expand_path(File.dirname(__FILE__))
 images_dir = File.join dir, 'img'
 
 [
-  [125, 104, 50, 'ukraine-ato-current-tiny'],
-  [300, 250, 50, 'ukraine-ato-current-small'],
-  [800, 667, 50, 'ukraine-ato-current'],
-].each do |x, y, frame_delay, filename|
+  [400, 334, 50, 'ukraine-ato-current-twitter', 10],
+  [125, 104, 50, 'ukraine-ato-current-tiny', 1],
+  [300, 250, 50, 'ukraine-ato-current-small', 1],
+  [800, 667, 50, 'ukraine-ato-current', 1],
+].each do |x, y, frame_delay, filename, take_every_x_frame|
   export_file_path = File.join dir, 'img', "#{filename}.gif"
-  image = AtoGifGenerator.new(dir: images_dir, x: x, y: y, frame_delay: frame_delay, filename: filename)
+  image = AtoGifGenerator.new(dir: images_dir, x: x, y: y, frame_delay: frame_delay, filename: filename, take_every_x_frame: take_every_x_frame)
   image.save(export_file_path)
 end
