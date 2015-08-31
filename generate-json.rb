@@ -26,5 +26,5 @@ write_json = {
 }
 
 File.open(json_file, "w") do |f|
-  f.write(write_json.to_json)
+  f.write(JSON.pretty_generate write_json)
 end
