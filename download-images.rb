@@ -16,6 +16,7 @@ class Downloader
   IMAGES_DIR  = File.join(CURRENT_DIR, 'img')
 
   class ImageDownloader
+    class DownloadError < StandardError; end
     attr_reader :date, :save_file
     def initialize(date, save_file)
       @date      = date
@@ -23,20 +24,26 @@ class Downloader
     end
 
     def download
-      url = generate_url(date)
-      begin
-        open(save_file, 'wb') do |file|
-          file << open(url).read
-        end
+      if image = get_image
+        open(save_file, 'wb') { |f| f << get_image }
         image_optim.optimize_image! save_file
-        puts "Saved #{url}"
-      rescue OpenURI::HTTPError => e
-        puts "#{e.message}: #{url}"
-        File.delete save_file
       end
     end
 
   private
+
+    def get_image
+      [nil, 1, 2, 3].each do |attempt|
+        url = generate_url(date, attempt)
+        puts "Downloading #{url}"
+        image = open(url).read
+        puts "#{url}, #{image.size}"
+        return image if image.size.between?(900000, 1200000)
+      end
+      raise DownloadError, "No suitable image found"
+    rescue OpenURI::HTTPError => e
+      puts e.message
+    end
 
     def generate_url(d, increment = nil)
       month = d.strftime('%m')
