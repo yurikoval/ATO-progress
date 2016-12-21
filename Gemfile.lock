@@ -70,3 +70,7 @@ DEPENDENCIES
   guard-coffeescript
   image_optim
   image_optim_pack
+  pry
+
+BUNDLED WITH
+   1.13.5
