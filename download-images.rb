@@ -25,7 +25,7 @@ class Downloader
 
     def download
       if image = get_image
-        open(save_file, 'wb') { |f| f << get_image }
+        open(save_file, 'wb') { |f| f << image }
         image_optim.optimize_image! save_file
       end
     end
