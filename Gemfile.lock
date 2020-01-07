@@ -10,7 +10,7 @@ GEM
     coffee-script-source (1.9.1.1)
     execjs (2.5.2)
     exifr (1.2.2)
-    ffi (1.9.8)
+    ffi (1.11.3)
     formatador (0.2.5)
     fspath (2.1.1)
     guard (2.12.5)
